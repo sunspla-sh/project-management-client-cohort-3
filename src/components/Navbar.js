@@ -1,11 +1,32 @@
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/auth.context';
 
 function Navbar(){
+
+  const { isLoggedIn, user } = useContext(AuthContext);
+
   return (
     <nav>
       <Link to="/">Home</Link>
-      <Link to="/project-list">Project List</Link>
-      <Link to="/project/create">Add Project</Link>
+      { isLoggedIn && (
+        <>
+          <Link to="/project-list">Project List</Link>
+          <Link to="/project/create">Add Project</Link>
+          <button>Logout</button>
+        </>
+      )}
+      { user && (
+        <p>
+          Hey, {user.username}!
+        </p>
+      )}
+      { !isLoggedIn && (
+        <>
+          <Link to="/signup">Sign Up</Link>
+          <Link to="/login">Log In</Link>
+        </>
+      )}
     </nav>
   );
 }
