@@ -18,7 +18,12 @@ function AddProject(){
 
   const handleSubmit = event => {
     event.preventDefault();
-    axios.post(`http://localhost:3001/api/projects`, state)
+    const storedToken = localStorage.getItem('authToken');
+    axios.post(`http://localhost:3001/api/projects`, state, {
+      headers: {
+        authorization: `Bearer ${storedToken}`
+      }
+    })
       .then(res => {
         console.log(res.data);
         navigate('/project-list');

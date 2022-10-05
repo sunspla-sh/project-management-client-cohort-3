@@ -14,13 +14,25 @@ function SingleProjectPage(){
   console.log(projectId);
 
   const getSingleProject = projectId => {
-    axios.get(`http://localhost:3001/api/projects/${projectId}`)
+
+    const storedToken = localStorage.getItem('authToken');
+
+    axios.get(`http://localhost:3001/api/projects/${projectId}`, {
+      headers: {
+        authorization: `Bearer ${storedToken}`
+      }
+    })
       .then(res => setSingleProject(res.data.project))
       .catch(err => console.log(err))
   };
 
   const deleteSingleProject = projectId => {
-    axios.delete(`http://localhost:3001/api/projects/${projectId}`)
+    const storedToken = localStorage.getItem('authToken');
+    axios.delete(`http://localhost:3001/api/projects/${projectId}`, {
+      headers: {
+        authorization: `Bearer ${storedToken}`
+      }
+    })
       .then(res => {
         console.log(res);
         navigate('/project-list');

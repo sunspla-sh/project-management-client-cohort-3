@@ -47,12 +47,21 @@ function AuthProvider({ children }){
 
   }
 
+  const removeAuthToken = () => {
+    localStorage.removeItem('authToken');
+  };
+
+  const logOutUser = () => {
+    removeAuthToken();
+    authenticateUser();
+  }
+
   useEffect(() => {
     authenticateUser();
   }, [])
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, isLoading, user, storeToken, authenticateUser }}>
+    <AuthContext.Provider value={{ isLoggedIn, isLoading, user, storeToken, authenticateUser, logOutUser }}>
       {children}
     </AuthContext.Provider>
   );
