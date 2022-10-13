@@ -17,7 +17,7 @@ function SingleProjectPage(){
 
     const storedToken = localStorage.getItem('authToken');
 
-    axios.get(`http://localhost:3001/api/projects/${projectId}`, {
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/projects/${projectId}`, {
       headers: {
         authorization: `Bearer ${storedToken}`
       }
@@ -28,7 +28,7 @@ function SingleProjectPage(){
 
   const deleteSingleProject = projectId => {
     const storedToken = localStorage.getItem('authToken');
-    axios.delete(`http://localhost:3001/api/projects/${projectId}`, {
+    axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/projects/${projectId}`, {
       headers: {
         authorization: `Bearer ${storedToken}`
       }

@@ -19,7 +19,7 @@ function TaskForm(props){
       ...state,
       projectId: props.projectId
     };
-    axios.post('http://localhost:3001/api/tasks', taskObject, {
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/tasks`, taskObject, {
       headers: {
         authorization: `Bearer ${localStorage.getItem('authToken')}`
       }
