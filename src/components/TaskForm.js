@@ -19,7 +19,11 @@ function TaskForm(props){
       ...state,
       projectId: props.projectId
     };
-    axios.post('http://localhost:3001/api/tasks', taskObject)
+    axios.post('http://localhost:3001/api/tasks', taskObject, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem('authToken')}`
+      }
+    })
       .then(res => {
         console.log(res.data);
         props.getSingleProject(props.projectId);
